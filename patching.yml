@@ -2,7 +2,7 @@
 - name: VM Creation
   hosts: localhost
   tasks:
-  - name: PraveenTEST-02
+  - name: Create RHEL 9.0 VM - PraveenTEST-02
     os_server:
        state: present
        name: PraveenTEST-02
@@ -30,7 +30,7 @@
       changed_when: false
 
     - name: Ensure DNF is installed
-      yum:
+      dnf:
         name: dnf
         state: present
       when: dnf_installed.rc != 0
@@ -55,6 +55,12 @@
       reboot:
         msg: "Reboot initiated by Ansible after patching"
       when: reboot_rhel | bool
+
+    - name: Ensure log directory exists
+      file:
+        path: /var/log/ansible
+        state: directory
+        mode: '0755'
 
     - name: Log patching results
       lineinfile:
