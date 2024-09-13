@@ -1,21 +1,4 @@
 ---
-- name: VM Creation
-  hosts: localhost
-  tasks:
-  - name: Create RHEL 9.0 VM - PraveenTEST-02
-    os_server:
-       state: present
-       name: PraveenTEST-02
-       image: "rhel-9.0-cl"
-       key_name: k8s
-       timeout: 200
-       flavor: 11fb575e-0a42-4911-a684-f9f2b6eb9af9
-       auto_ip: no
-       network: 7ef4c191-a7dd-4b75-8f9d-31df32b86291
-       security_groups: default
-       meta:
-         os: rhel
-
 - name: Patching RHEL 9.0 VM
   hosts: all
   become: yes  # Use elevated privileges (sudo)
